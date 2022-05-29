@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  jenkins:
+    image: jenkins
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - jenkins_certs:/certs/client:ro
+    environment:
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - DOCKER_TLS_VERIFY=1
+    user: root
+
+  docker:
+      image: docker:dind
+      container_name: docker
+      ports:
+        - "2376:2376"
+      volumes:
+        - jenkins_home:/var/jenkins_home
+        - jenkins_certs:/certs/client
+      privileged: true
+      environment:
+        - DOCKER_TLS_CERTDIR=/certs
+      command: --storage-driver=overlay2
+
+volumes:
+  jenkins_home:
+  jenkins_certs:

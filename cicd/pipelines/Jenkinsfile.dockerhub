@@ -1,0 +1,75 @@
+def sendNotification() {
+    echo '${currentBuild.result}'
+}
+
+
+pipeline {
+
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2'))
+        disableConcurrentBuilds()
+        skipDefaultCheckout()
+    }
+
+    environment {
+        IMAGE = 'sayonarasantos/ff-classify'
+        TAG = 'mobilenet-lite'
+
+        // credentials
+        GIT_CREDENTIALS = 'github-credentials'
+        DOCKER_CREDENTIALS = 'dockerhub-credentials'
+        DOCKER_REGISTRY = 'registry.hub.docker.com'
+        // DEPLOYMENT_SSH_CREDENTIALS = 'ssh-key'
+        // DEPLOYMENT_IP = credentials('machine-ip')
+    }
+
+    stages {
+        stage('Checkout repository') {
+            steps {
+                checkout([$class: 'GitSCM',
+                branches: [[name: 'main']],
+                extensions: [],
+                userRemoteConfigs: [[credentialsId: GIT_CREDENTIALS, url: 'https://github.com/rodrigoparente/florest-fire-classification.git']]])
+            }
+        }
+
+        stage('Build image') {
+            steps {
+                script {
+                    docker.withRegistry('https://${DOCKER_REGISTRY}', DOCKER_CREDENTIALS) {
+                        def customImage = docker.build("${IMAGE}:${TAG}", '--build-arg CODE_DIR=tflite-code --build-arg MODEL_FILE=model_mobilenet_lite.tflite --build-arg MODEL_TYPE=tflite --file ./docker/test/Dockerfile .')
+                        customImage.push()
+                    }
+                }
+                sh 'docker image rm ${IMAGE}:${TAG} ${DOCKER_REGISTRY}/${IMAGE}:${TAG} && docker images'
+            }
+        }
+
+        // stage('Deploy image') {
+        //     steps {
+        //         sshagent (credentials: [DEPLOYMENT_SSH_CREDENTIALS]) {
+        //             sh '''
+        //                 ssh -o StrictHostKeyChecking=no ${DEPLOYMENT_IP} "\
+        //                 docker image rm ${IMAGE}:${TAG} \
+        //                 && docker image pull ${IMAGE}:${TAG} \
+        //                 && docker images | grep ${IMAGE}"
+        //             '''
+        //         }
+        //     }
+        // }
+    }
+
+    post {
+        success { sendNotification() }
+
+        failure { sendNotification() }
+
+        cleanup {
+            sh 'docker system prune -f'
+            dir("${WORKSPACE}@tmp") { deleteDir() }
+            deleteDir()
+        }
+    }
+}
