@@ -14,13 +14,13 @@ pipeline {
     }
 
     environment {
-        IMAGE = 'sayonarasantos/ff-classify'
-        TAG = 'mobilenet-lite'
+        IMAGE = 'ff-classify'
+        TAG = 'aws-mobilenet-lite'
 
         // credentials
         GIT_CREDENTIALS = 'github-credentials'
-        DOCKER_CREDENTIALS = 'dockerhub-credentials'
-        DOCKER_REGISTRY = 'registry.hub.docker.com'
+        DOCKER_CREDENTIALS = 'ecr:us-east-1:ecr-credentials'
+        DOCKER_REGISTRY = credentials('ecr-registry')
         // DEPLOYMENT_SSH_CREDENTIALS = 'ssh-key'
         // DEPLOYMENT_IP = credentials('machine-ip')
     }
@@ -31,14 +31,14 @@ pipeline {
                 checkout([$class: 'GitSCM',
                 branches: [[name: 'main']],
                 extensions: [],
-                userRemoteConfigs: [[credentialsId: GIT_CREDENTIALS, url: 'https://github.com/rodrigoparente/florest-fire-classification.git']]])
+                userRemoteConfigs: [[credentialsId: GIT_CREDENTIALS, url: 'https://github.com/rodrigoparente/forest-fire-classification.git']]])
             }
         }
 
         stage('Build image') {
             steps {
                 script {
-                    docker.withRegistry('https://${DOCKER_REGISTRY}', DOCKER_CREDENTIALS) {
+                    docker.withRegistry("https://${DOCKER_REGISTRY}", DOCKER_CREDENTIALS) {
                         def customImage = docker.build("${IMAGE}:${TAG}", '--build-arg CODE_DIR=tflite-code --build-arg MODEL_FILE=model_mobilenet_lite.tflite --build-arg MODEL_TYPE=tflite --file ./docker/test/Dockerfile .')
                         customImage.push()
                     }
