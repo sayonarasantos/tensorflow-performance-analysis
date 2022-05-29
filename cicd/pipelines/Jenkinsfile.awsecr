@@ -16,6 +16,7 @@ pipeline {
     environment {
         IMAGE = 'ff-classify'
         TAG = 'aws-mobilenet-lite'
+        ARGS = '--build-arg CODE_DIR=tflite-code --build-arg MODEL_FILE=model_mobilenet_lite.tflite --build-arg MODEL_TYPE=tflite --file ./docker/test/Dockerfile .'
 
         // credentials
         GIT_CREDENTIALS = 'github-credentials'
@@ -39,7 +40,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry("https://${DOCKER_REGISTRY}", DOCKER_CREDENTIALS) {
-                        def customImage = docker.build("${IMAGE}:${TAG}", '--build-arg CODE_DIR=tflite-code --build-arg MODEL_FILE=model_mobilenet_lite.tflite --build-arg MODEL_TYPE=tflite --file ./docker/test/Dockerfile .')
+                        def customImage = docker.build("${IMAGE}:${TAG}", ARGS)
                         customImage.push()
                     }
                 }
