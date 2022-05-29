@@ -32,14 +32,14 @@ pipeline {
                 checkout([$class: 'GitSCM',
                 branches: [[name: 'main']],
                 extensions: [],
-                userRemoteConfigs: [[credentialsId: GIT_CREDENTIALS, url: 'https://github.com/rodrigoparente/florest-fire-classification.git']]])
+                userRemoteConfigs: [[credentialsId: GIT_CREDENTIALS, url: 'https://github.com/rodrigoparente/forest-fire-classification.git']]])
             }
         }
 
         stage('Build image') {
             steps {
                 script {
-                    docker.withRegistry('https://${DOCKER_REGISTRY}', DOCKER_CREDENTIALS) {
+                    docker.withRegistry("https://${DOCKER_REGISTRY}", DOCKER_CREDENTIALS) {
                         def customImage = docker.build("${IMAGE}:${TAG}", ARGS)
                         customImage.push()
                     }
