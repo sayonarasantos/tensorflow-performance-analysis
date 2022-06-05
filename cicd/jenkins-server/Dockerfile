@@ -39,13 +39,13 @@ RUN apt-get update -y -q \
     && rm -rf awscliv2.zip \
     && rm -rf /var/lib/apt/lists/*
 
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+
+RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
+
 USER jenkins
 
 RUN mkdir -p ~/.docker \
     && echo echo -e '{\n    "credsStore": "ecr-login"\n}' > ~/.docker/config.json
 
 # RUN aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${AWS_ECR_ADDRESS}
-
-COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
-
-RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
