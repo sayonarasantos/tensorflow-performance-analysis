@@ -1,7 +1,7 @@
 FROM jenkins/jenkins:2.332.3-lts
 
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
+# ARG AWS_ACCESS_KEY_ID
+# ARG AWS_SECRET_ACCESS_KEY
 # ARG AWS_ECR_ADDRESS=<account id>.dkr.ecr.<region>.amazonaws.com
 
 USER root
