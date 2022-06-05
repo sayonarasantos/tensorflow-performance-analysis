@@ -1,2 +1,3 @@
 tmp/
 cicd/docker-compose.yml
+inventory/

@@ -1,0 +1,43 @@
+---
+
+- name: Install apt-transport-https (Debian)
+  apt:
+    name: apt-transport-https
+    state: present
+  when: ansible_distribution == "Debian"
+
+- name: Add the InfluxData repository key
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
+- name: Add InfluxData repository
+  apt_repository:
+    repo: "deb https://repos.influxdata.com/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable"
+    filename: "influxdb"
+    state: present
+
+- name: Install the Telegraf
+  apt:
+    name: telegraf
+    update_cache: yes
+  register: install_telegraf
+
+- name: Update telegraf.conf with influxdb settings
+  ini_file:
+    path: /etc/telegraf/telegraf.conf
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    state: "{{ item.state }}"
+  loop:
+    - { section: '[outputs.influxdb]', option: '  urls', value: '["http://{{ management_ip }}:{{ influxdb_port }}"]', state: 'present' }
+    - { section: '[outputs.influxdb]', option: '  database', value: '"{{ influxdb_db }}"', state: 'present' }
+    - { section: '[outputs.influxdb]', option: '  username', value: '"{{ influxdb_user }}"', state: 'present' }
+    - { section: '[outputs.influxdb]', option: '  password', value: '"{{ influxdb_password }}"', state: 'present' }
+
+- name: Start Telegraf
+  service:
+    name: telegraf
+    state: restarted
+    enabled: yes

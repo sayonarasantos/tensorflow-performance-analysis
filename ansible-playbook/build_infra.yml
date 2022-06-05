@@ -1,0 +1,24 @@
+---
+
+# - hosts: localhost
+#   connection: local
+- hosts: monitoring_host
+  vars_files:
+    - inventory/group_vars/all.yml
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: influxdb
+    - role: grafana
+    - role: createtelegrafdb
+
+- hosts: monitored_hosts
+  vars_files:
+    - inventory/group_vars/all.yml
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: telegraf
+    - role: docker
+
+# ansible-playbook build_infra.yml -i inventory/hosts.ini

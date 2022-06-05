@@ -1,0 +1,18 @@
+---
+
+- hosts: monitored_hosts
+  gather_facts: no
+  become: yes
+  roles:
+    - role: reset_telegraf
+
+# - hosts: localhost
+#   connection: local
+- hosts: monitoring_host
+  gather_facts: yes
+  become: yes
+  roles:
+    - role: reset_grafana
+    - role: reset_influxdb
+
+# ansible-playbook reset_infra.yml --ask-become-pass

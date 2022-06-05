@@ -1,0 +1,54 @@
+---
+
+- name: Install Docker on Debin or Ubuntu
+  block:
+
+  - name: Install required packages
+    apt:
+      name: '{{ item }}'
+      update_cache: yes
+    loop:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+
+  - name: Add official GPG key of Docker
+    apt_key:
+      url: https://download.docker.com/linux/{{ ansible_distribution|lower }}/gpg
+      state: present
+
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable
+      state: present
+
+  - name: Update apt and install Docker CE
+    apt:
+      name: '{{ item }}'
+      update_cache: yes
+    loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+  when: (ansible_distribution == "Debian" and ansible_distribution_version | int >= 10) or
+        (ansible_distribution == "Ubuntu" and ansible_distribution_version | int >= 20)
+
+- name: Add docker group
+  group:
+    name: docker
+    state: present
+
+- name: Add user to docker group
+  user:
+    name: '{{ docker_user }}'
+    groups: docker
+    append: yes
+
+- name: Install Compose
+  get_url:
+    url: 'https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64'
+    dest: '/usr/local/bin/docker-compose'
+    mode: 0755
