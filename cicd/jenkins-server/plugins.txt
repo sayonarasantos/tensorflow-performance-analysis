@@ -7,7 +7,7 @@ workflow-scm-step: 400.v6b_89a_1317c9a_
 display-url-api: 2.3.6
 jjwt-api: 0.11.2-71.v2722b_b_06a_2a_f
 momentjs: 1.1.1
-jdk-tool: 1.0
+jdk-tool: 1.5
 htmlpublisher: 1.30
 blueocean-dashboard: 1.25.5
 pipeline-aws: 1.43
@@ -59,7 +59,7 @@ resource-disposer: 0.19
 blueocean-pipeline-scm-api: 1.25.5
 ant: 475.vf34069fef73c
 workflow-multibranch: 716.vc692a_e52371b_
-command-launcher: 1.2
+command-launcher: 84.v4a_97f2027398
 mailer: 414.vcc4c33714601
 aws-java-sdk-iam: 1.12.215-339.vdc07efc5320c
 pipeline-groovy-lib: 591.v3a_7f422b_d058
@@ -92,7 +92,7 @@ jquery3-api: 3.6.0-4
 jaxb: 2.3.6-1
 apache-httpcomponents-client-4-api: 4.5.13-1.0
 blueocean-github-pipeline: 1.25.5
-blueocean: 1.25.3
+blueocean: 1.25.5
 trilead-api: 1.57.v6e90e07157e1
 gradle: 1.38
 docker-commons: 1.19
@@ -104,11 +104,12 @@ favorite: 2.4.1
 credentials-binding: 523.vd859a_4b_122e6
 sshd: 3.0.3
 blueocean-autofavorite: 1.2.5
-bouncycastle-api: 2.25
+bouncycastle-api: 2.26
 aws-java-sdk-ec2: 1.12.215-339.vdc07efc5320c
 aws-java-sdk-elasticbeanstalk: 1.12.215-339.vdc07efc5320c
 ssh-slaves: 1.814.vc82988f54b_10
 blueocean-pipeline-api-impl: 1.25.5
+docker-build-publish: 1.3.3
 blueocean-i18n: 1.25.5
 plugin-util-api: 2.17.0
 ldap: 2.10
@@ -123,4 +124,4 @@ durable-task: 496.va67c6f9eefa7
 github: 1.34.3
 aws-java-sdk-logs: 1.12.215-339.vdc07efc5320c
 workflow-step-api: 625.vd896b_f445a_f8
-Result: [Plugin:plain-credentials, Plugin:workflow-basic-steps, Plugin:pipeline-model-definition, Plugin:workflow-support, Plugin:blueocean-pipeline-editor, Plugin:workflow-scm-step, Plugin:display-url-api, Plugin:jjwt-api, Plugin:momentjs, Plugin:jdk-tool, Plugin:htmlpublisher, Plugin:blueocean-dashboard, Plugin:pipeline-aws, Plugin:blueocean-rest-impl, Plugin:javax-mail-api, Plugin:workflow-cps, Plugin:blueocean-core-js, Plugin:workflow-durable-task-step, Plugin:pipeline-stage-view, Plugin:blueocean-git-pipeline, Plugin:ws-cleanup, Plugin:antisamy-markup-formatter, Plugin:token-macro, Plugin:pipeline-github-lib, Plugin:javax-activation-api, Plugin:git-client, Plugin:workflow-job, Plugin:blueocean-display-url, Plugin:echarts-api, Plugin:bootstrap5-api, Plugin:cloudbees-folder, Plugin:aws-credentials, Plugin:blueocean-web, Plugin:aws-java-sdk, Plugin:matrix-project, Plugin:blueocean-rest, Plugin:pam-auth, Plugin:checks-api, Plugin:email-ext, Plugin:pipeline-model-api, Plugin:pipeline-rest-api, Plugin:handy-uri-templates-2-api, Plugin:blueocean-events, Plugin:aws-java-sdk-ssm, Plugin:sse-gateway, Plugin:aws-java-sdk-ecs, Plugin:amazon-ecr, Plugin:snakeyaml-api, Plugin:cloudbees-bitbucket-branch-source, Plugin:blueocean-config, Plugin:jackson2-api, Plugin:docker-workflow, Plugin:aws-java-sdk-minimal, Plugin:branch-api, Plugin:pipeline-stage-step, Plugin:authentication-tokens, Plugin:github-branch-source, Plugin:resource-disposer, Plugin:blueocean-pipeline-scm-api, Plugin:ant, Plugin:workflow-multibranch, Plugin:command-launcher, Plugin:mailer, Plugin:aws-java-sdk-iam, Plugin:pipeline-groovy-lib, Plugin:blueocean-commons, Plugin:variant, Plugin:workflow-aggregator, Plugin:junit, Plugin:font-awesome-api, Plugin:caffeine-api, Plugin:credentials, Plugin:ace-editor, Plugin:workflow-api, Plugin:blueocean-personalization, Plugin:timestamper, Plugin:aws-java-sdk-codebuild, Plugin:ssh-credentials, Plugin:aws-java-sdk-ecr, Plugin:popper2-api, Plugin:pipeline-model-extensions, Plugin:scm-api, Plugin:git, Plugin:pipeline-stage-tags-metadata, Plugin:jsch, Plugin:script-security, Plugin:build-timeout, Plugin:blueocean-jwt, Plugin:matrix-auth, Plugin:pipeline-input-step, Plugin:jquery3-api, Plugin:jaxb, Plugin:apache-httpcomponents-client-4-api, Plugin:blueocean-github-pipeline, Plugin:blueocean, Plugin:trilead-api, Plugin:gradle, Plugin:docker-commons, Plugin:github-api, Plugin:pipeline-build-step, Plugin:jenkins-design-language, Plugin:pipeline-milestone-step, Plugin:favorite, Plugin:credentials-binding, Plugin:sshd, Plugin:blueocean-autofavorite, Plugin:bouncycastle-api, Plugin:aws-java-sdk-ec2, Plugin:aws-java-sdk-elasticbeanstalk, Plugin:ssh-slaves, Plugin:blueocean-pipeline-api-impl, Plugin:blueocean-i18n, Plugin:plugin-util-api, Plugin:ldap, Plugin:blueocean-bitbucket-pipeline, Plugin:okhttp-api, Plugin:structs, Plugin:pubsub-light, Plugin:handlebars, Plugin:pipeline-graph-analysis, Plugin:aws-java-sdk-cloudformation, Plugin:durable-task, Plugin:github, Plugin:aws-java-sdk-logs, Plugin:workflow-step-api]
+Result: [Plugin:plain-credentials, Plugin:workflow-basic-steps, Plugin:pipeline-model-definition, Plugin:workflow-support, Plugin:blueocean-pipeline-editor, Plugin:workflow-scm-step, Plugin:display-url-api, Plugin:jjwt-api, Plugin:momentjs, Plugin:jdk-tool, Plugin:htmlpublisher, Plugin:blueocean-dashboard, Plugin:pipeline-aws, Plugin:blueocean-rest-impl, Plugin:javax-mail-api, Plugin:workflow-cps, Plugin:blueocean-core-js, Plugin:workflow-durable-task-step, Plugin:pipeline-stage-view, Plugin:blueocean-git-pipeline, Plugin:ws-cleanup, Plugin:antisamy-markup-formatter, Plugin:token-macro, Plugin:pipeline-github-lib, Plugin:javax-activation-api, Plugin:git-client, Plugin:workflow-job, Plugin:blueocean-display-url, Plugin:echarts-api, Plugin:bootstrap5-api, Plugin:cloudbees-folder, Plugin:aws-credentials, Plugin:blueocean-web, Plugin:aws-java-sdk, Plugin:matrix-project, Plugin:blueocean-rest, Plugin:pam-auth, Plugin:checks-api, Plugin:email-ext, Plugin:pipeline-model-api, Plugin:pipeline-rest-api, Plugin:handy-uri-templates-2-api, Plugin:blueocean-events, Plugin:aws-java-sdk-ssm, Plugin:sse-gateway, Plugin:aws-java-sdk-ecs, Plugin:amazon-ecr, Plugin:snakeyaml-api, Plugin:cloudbees-bitbucket-branch-source, Plugin:blueocean-config, Plugin:jackson2-api, Plugin:docker-workflow, Plugin:aws-java-sdk-minimal, Plugin:branch-api, Plugin:pipeline-stage-step, Plugin:authentication-tokens, Plugin:github-branch-source, Plugin:resource-disposer, Plugin:blueocean-pipeline-scm-api, Plugin:ant, Plugin:workflow-multibranch, Plugin:command-launcher, Plugin:mailer, Plugin:aws-java-sdk-iam, Plugin:pipeline-groovy-lib, Plugin:blueocean-commons, Plugin:variant, Plugin:workflow-aggregator, Plugin:junit, Plugin:font-awesome-api, Plugin:caffeine-api, Plugin:credentials, Plugin:ace-editor, Plugin:workflow-api, Plugin:blueocean-personalization, Plugin:timestamper, Plugin:aws-java-sdk-codebuild, Plugin:ssh-credentials, Plugin:aws-java-sdk-ecr, Plugin:popper2-api, Plugin:pipeline-model-extensions, Plugin:scm-api, Plugin:git, Plugin:pipeline-stage-tags-metadata, Plugin:jsch, Plugin:script-security, Plugin:build-timeout, Plugin:blueocean-jwt, Plugin:matrix-auth, Plugin:pipeline-input-step, Plugin:jquery3-api, Plugin:jaxb, Plugin:apache-httpcomponents-client-4-api, Plugin:blueocean-github-pipeline, Plugin:blueocean, Plugin:trilead-api, Plugin:gradle, Plugin:docker-commons, Plugin:github-api, Plugin:pipeline-build-step, Plugin:jenkins-design-language, Plugin:pipeline-milestone-step, Plugin:favorite, Plugin:credentials-binding, Plugin:sshd, Plugin:blueocean-autofavorite, Plugin:bouncycastle-api, Plugin:aws-java-sdk-ec2, Plugin:aws-java-sdk-elasticbeanstalk, Plugin:ssh-slaves, Plugin:blueocean-pipeline-api-impl, Plugin:docker-build-publish, Plugin:blueocean-i18n, Plugin:plugin-util-api, Plugin:ldap, Plugin:blueocean-bitbucket-pipeline, Plugin:okhttp-api, Plugin:structs, Plugin:pubsub-light, Plugin:handlebars, Plugin:pipeline-graph-analysis, Plugin:aws-java-sdk-cloudformation, Plugin:durable-task, Plugin:github, Plugin:aws-java-sdk-logs, Plugin:workflow-step-api]
