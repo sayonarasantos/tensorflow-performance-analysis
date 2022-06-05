@@ -17,6 +17,7 @@ services:
       - DOCKER_HOST=tcp://docker:2376
       - DOCKER_CERT_PATH=/certs/client
       - DOCKER_TLS_VERIFY=1
+    restart: unless-stopped
 
   docker:
       image: docker:dind
@@ -30,6 +31,7 @@ services:
       environment:
         - DOCKER_TLS_CERTDIR=/certs
       command: --storage-driver=overlay2
+      restart: unless-stopped
 
 volumes:
   jenkins_home:
