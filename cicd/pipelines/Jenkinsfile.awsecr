@@ -1,14 +1,9 @@
-def sendNotification() {
-    echo '${currentBuild.result}'
-}
-
-
 pipeline {
 
     agent any
 
     options {
-        buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2'))
+        buildDiscarder(logRotator(numToKeepStr: '100', artifactNumToKeepStr: '2'))
         disableConcurrentBuilds()
         skipDefaultCheckout()
     }
@@ -22,8 +17,6 @@ pipeline {
         GIT_CREDENTIALS = 'github-credentials'
         DOCKER_CREDENTIALS = 'ecr:us-east-1:ecr-credentials'
         DOCKER_REGISTRY = credentials('ecr-registry')
-        // DEPLOYMENT_SSH_CREDENTIALS = 'ssh-key'
-        // DEPLOYMENT_IP = credentials('machine-ip')
     }
 
     stages {
@@ -44,31 +37,21 @@ pipeline {
                         customImage.push()
                     }
                 }
-                sh 'docker image rm ${IMAGE}:${TAG} ${DOCKER_REGISTRY}/${IMAGE}:${TAG} && docker images'
             }
         }
 
         // stage('Deploy image') {
         //     steps {
-        //         sshagent (credentials: [DEPLOYMENT_SSH_CREDENTIALS]) {
-        //             sh '''
-        //                 ssh -o StrictHostKeyChecking=no ${DEPLOYMENT_IP} "\
-        //                 docker image rm ${IMAGE}:${TAG} \
-        //                 && docker image pull ${IMAGE}:${TAG} \
-        //                 && docker images | grep ${IMAGE}"
-        //             '''
-        //         }
         //     }
         // }
     }
 
     post {
-        success { sendNotification() }
-
-        failure { sendNotification() }
-
         cleanup {
-            sh 'docker system prune -f'
+            sh '''docker image rm ${IMAGE}:${TAG} ${DOCKER_REGISTRY}/${IMAGE}:${TAG}
+            docker image rm python:3.8-slim-buster
+            docker system prune -f
+            docker images'''
             // dir("${WORKSPACE}@tmp") { deleteDir() }
             // deleteDir()
         }
