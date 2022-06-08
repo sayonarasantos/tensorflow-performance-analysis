@@ -1,9 +1,5 @@
 FROM jenkins/jenkins:2.332.3-lts
 
-# ARG AWS_ACCESS_KEY_ID
-# ARG AWS_SECRET_ACCESS_KEY
-# ARG AWS_ECR_ADDRESS=<account id>.dkr.ecr.<region>.amazonaws.com
-
 USER root
 
 RUN apt-get update -y -q \
@@ -47,5 +43,3 @@ USER jenkins
 
 RUN mkdir -p ~/.docker \
     && echo echo -e '{\n    "credsStore": "ecr-login"\n}' > ~/.docker/config.json
-
-# RUN aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${AWS_ECR_ADDRESS}
