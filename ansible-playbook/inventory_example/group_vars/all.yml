@@ -9,7 +9,7 @@ influxdb_user: telegraf
 influxdb_password: telegraf
 
 # telegraf
-management_ip: '10.10.0.4'
+monitoring_ip: '10.10.0.4'
 
 # docker
 docker_user: '{{ ansible_user }}'
