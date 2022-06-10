@@ -1,0 +1,11 @@
+Jenkins
+t3.medium
+Disco: 18GB de ssd
+CPU: 2vCPU
+Memória: 4GB de memória
+
+Monitoring
+t2.micro
+Disco: 8GB de ssd
+CPU: 1vCPU
+Memória: 1GB de memória

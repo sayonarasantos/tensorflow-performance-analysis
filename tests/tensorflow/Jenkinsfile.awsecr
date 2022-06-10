@@ -1,0 +1,59 @@
+pipeline {
+
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '100', artifactNumToKeepStr: '2'))
+        disableConcurrentBuilds()
+        skipDefaultCheckout()
+    }
+
+    environment {
+        IMAGE = 'ff-classify'
+        TAG = 'aws-mobilenet'
+        ARGS = '--build-arg CODE_DIR=tf-code --build-arg MODEL_FILE=model_mobilenet.h5 --build-arg MODEL_TYPE=h5 --file ./docker/Dockerfile .'
+
+        // credentials
+        GIT_CREDENTIALS = 'github-credentials'
+        DOCKER_CREDENTIALS = 'ecr:us-east-1:ecr-credentials'
+        DOCKER_REGISTRY = credentials('ecr-registry')
+    }
+
+    stages {
+        stage('Checkout repository') {
+            steps {
+                checkout([$class: 'GitSCM',
+                branches: [[name: 'main']],
+                extensions: [],
+                userRemoteConfigs: [[credentialsId: GIT_CREDENTIALS, url: 'https://github.com/rodrigoparente/forest-fire-classification.git']]])
+            }
+        }
+
+        stage('Build image') {
+            steps {
+                script {
+                    docker.withRegistry("https://${DOCKER_REGISTRY}", DOCKER_CREDENTIALS) {
+                        def customImage = docker.build("${IMAGE}:${TAG}", ARGS)
+                        customImage.push()
+                    }
+                }
+            }
+        }
+
+        // stage('Deploy image') {
+        //     steps {
+        //     }
+        // }
+    }
+
+    post {
+        cleanup {
+            sh '''docker image rm ${IMAGE}:${TAG} ${DOCKER_REGISTRY}/${IMAGE}:${TAG}
+            docker image rm python:3.8-slim-buster
+            docker system prune -f
+            docker images'''
+            // dir("${WORKSPACE}@tmp") { deleteDir() }
+            // deleteDir()
+        }
+    }
+}
