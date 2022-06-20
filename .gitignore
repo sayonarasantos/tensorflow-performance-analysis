@@ -2,3 +2,4 @@ tmp/
 cicd/docker-compose.yml
 inventory/
 .ipynb_checkpoints
+*.tar.xz

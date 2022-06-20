@@ -1,9 +1,16 @@
-https://www.jenkins.io/doc/book/installing/docker/#downloading-and-running-jenkins-in-docker
-https://devopscube.com/run-docker-in-docker/
+# TensorFlow vs TensorFlow Lite: a performance analysis at the CI/CD level
 
-https://grafana.com/grafana/dashboards/10585
-https://grafana.com/grafana/dashboards/11912
-https://grafana.com/grafana/dashboards/928
-https://ironlinux.com.br/instalando-a-pilha-tig-telegraf-influxdb-e-grafana-debian9/
+Authors: Sayonara Santos and Rodrigo Parente
 
-docker run -p 10000:8888 -v ${PWD}/tests:/home/jovyan/tests jupyter/scipy-notebook:6b49f3337709
+Description: This repository is part of a study on the impact of Machine Learning packages on product update pipelines.
+
+In this study, we designed one model with the TensorFlow package and the other with TensorFlow Lite, which perform the same classification. Then we develop applications based on the models. Finally, we compared the performance of the models and verified the resource and time consumption in the execution of the CI/CD pipelines of the applications.
+
+Folder organization:
+
+```sh
+.
+├── ansible-playbook: Docker configuration and monitoring stack playbook;
+├── cicd: Jenkins server and pipelines configuration files;
+├── tests: test results.
+```
