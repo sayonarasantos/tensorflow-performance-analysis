@@ -13,6 +13,7 @@ This folder (`tests`) is organized as follows:
 │   ├── results_analysis.ipynb: notebook with the data processing and calculation of metrics;
 │   ├── tensorflow: folder with data from experiments with Tensorflow;
 │   └── tensorflow-lite: folder with data from experiments with Tensorflow Lite.
+├── t_test: folders with the files referring to hypothesis test.
 ```
 
 

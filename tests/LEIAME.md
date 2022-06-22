@@ -12,7 +12,8 @@ Esta pasta (`tests`) está organizada da seguinte forma:
 ├── experiment2: pastas com os arquivos referentes ao segundo experimento;
 │ ├── results_analysis.ipynb: notebook com processamento dos dados e cálculo de métricas;
 │ ├── tensorflow: pasta com dados dos experimentos com Tensorflow;
-│ └── tensorflow-lite: pasta com dados dos experimentos com Tensorflow Lite.
+│ └── tensorflow-lite: pasta com dados dos experimentos com Tensorflow Lite/
+├── t_test: pasta com os arquivos do teste de hipótese.
 ```
 
 Para mais informações, você pode acessar o repositório completo da análise de desempenho deste estudo: https://github.com/sayonarasantos/tensorflow-performance-analysis.

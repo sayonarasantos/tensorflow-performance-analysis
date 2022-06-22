@@ -14,3 +14,5 @@ Folder organization:
 ├── cicd: Jenkins server and pipelines configuration files;
 ├── tests: test results.
 ```
+
+The code of the developed application with TensorFlow is available in https://github.com/rodrigoparente/forest-fire-classification.
